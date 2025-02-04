@@ -1,0 +1,129 @@
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+  line-height: 1.7;
+  color: #070707;
+  background-color: white;
+
+  display: grid;
+  grid-template-columns: [sidebar-start] 5rem [sidebar-end main-start] 1fr [main-end];
+}
+
+.sidebar {
+  grid-column: sidebar-start/ sidebar-end;
+  background-color: black;
+  font-size: 3rem;
+  text-align: center;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.gallery {
+  grid-column: main-start/ main-end;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(12.5rem, 1fr));
+  grid-auto-rows: 12.5rem;
+  grid-auto-flow: dense;
+  gap: 0.75rem;
+}
+
+.gallery > * {
+  margin: 0;
+}
+
+h1 {
+  grid-column: span 2;
+  text-align: center;
+  line-height: 1.5;
+  margin-block-end: 1rem;
+}
+
+.gallery figure {
+  container-type: inline-size;
+  container-name: figure;
+
+  display: grid;
+  overflow: hidden;
+  grid-template-rows: minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1fr);
+
+  animation: render ease-in-out;
+  animation-timeline: view();
+  animation-range: entry 0 cover 25%;
+}
+
+.gallery figure img {
+  grid-area: 1/1/-1/-1;
+  object-fit: cover;
+  inline-size: 100%;
+  block-size: 100%;
+
+  transition: scale 0.75s ease-in-out;
+}
+.gallery figcaption {
+  grid-area: 1/1/-1/-1;
+  z-index: 1;
+  background-color: transparent 25%, rgba(0, 0, 0, 1) 75%;
+  color: white;
+
+  font-size: 0.6rem;
+  text-align: center;
+  line-height: 1.3;
+
+  display: none;
+}
+
+@container figure (min-width : 20rem) {
+  .gallery figcaption {
+    display: block;
+  }
+}
+
+.gallery figcaption h2 {
+  font-size: 1.062rem;
+}
+
+.gallery figcaption p {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.gallery figure figcaption {
+  align-self: end;
+}
+
+.gallery figure:hover img {
+  scale: 1.125;
+  overflow: hidden;
+}
+
+@media (width > 600px) {
+  .gallery figure:nth-child(1) {
+    grid-area: span 2 / span 2;
+  }
+
+  .gallery figure:nth-child(4n + 1) {
+    grid-row: span 2;
+  }
+
+  .gallery figure:nth-child(4n + 2) {
+    grid-column: span 2;
+  }
+}
+
+@keyframes render {
+  from {
+    opacity: 0;
+    scale: 0.5;
+  }
+  to {
+    opacity: 1;
+    scale: 1;
+  }
+}
