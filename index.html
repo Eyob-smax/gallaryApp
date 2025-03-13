@@ -345,5 +345,24 @@
         </figcaption>
       </figure>
     </div>
+    <script>
+      const imgs = document.querySelectorAll("img");
+      const sidebar = document.querySelector(".sidebar");
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("active");
+          } else {
+            entry.target.classList.remove("active");
+          }
+        });
+      });
+
+      imgs.forEach((img) => {
+        img.setAttribute("loading", "lazy");
+        // observer.observe(img);
+      });
+    </script>
   </body>
 </html>

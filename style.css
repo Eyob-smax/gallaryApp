@@ -63,6 +63,7 @@ h1 {
   height: 100%;
   width: 100%;
   transition: scale 0.75s ease-in-out;
+  display: none;
 }
 .gallery figcaption {
   grid-area: 1/1/-1/-1;
@@ -125,4 +126,8 @@ h1 {
     opacity: 1;
     scale: 1;
   }
+}
+
+.active {
+  display: block;
 }
